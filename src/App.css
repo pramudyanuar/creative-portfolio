@@ -1,0 +1,44 @@
+/* src/App.css */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+}
+
+section {
+  padding: 40px 20px;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #2d2d2d;
+  color: #aaa;
+  text-align: center;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+/* Adjust layout for when sidebar is open on mobile */
+.md\\:hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Ensure the main content doesn't get hidden when the sidebar is toggled */
+  .main-content {
+    margin-left: 0;
+  }
+}
