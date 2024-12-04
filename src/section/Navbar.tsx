@@ -10,7 +10,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNavbarOpen }) => {
   return (
-    <div className="md:hidden fixed top-0 left-0 w-full bg-gradient-to-r from-indigo-600 to-blue-800 text-white shadow-lg z-50 overflow-hidden">
+    <div className="md:hidden fixed top-0 left-0 w-full bg-gray-900 text-white shadow-lg z-50 overflow-hidden">
       {/* Hamburger Icon */}
       <div className="flex justify-between items-center p-4">
         {/* Add Photo and Name in One Div */}

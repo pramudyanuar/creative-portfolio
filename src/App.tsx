@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
-import Home from './components/Home';
-import Service from './components/Service';
-import About from './components/About';
-import Portfolio from './components/Portfolio';
-import Contact from './components/Contact';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
+import Home from './section/Home';
+import Service from './section/Service';
+import About from './section/About';
+import Portfolio from './section/Portfolio';
+import Contact from './section/Contact';
+import Sidebar from './section/Sidebar';
+import Navbar from './section/Navbar';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('home');
@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white m-0 p-0">
+    <div className="w-full bg-gray-900 text-white m-0 p-0">
       {/* Sidebar */}
       <Sidebar 
         setActiveSection={setActiveSection} 
@@ -31,7 +31,7 @@ const App: React.FC = () => {
       />
 
       {/* Main Content Area */}
-      <div className={`flex-grow w-full overflow-auto ml-0 md:ml-80`}>
+      <div className={`ml-0 md:ml-80 mt-20 md:mt-0`}>
         {/* Render the appropriate section based on activeSection */}
         {activeSection === 'home' && <Home />}
         {activeSection === 'service' && <Service />}

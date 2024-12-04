@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'; // Import social icons
+import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'; // Import social icons
 import { MdHome, MdBuild, MdInfo, MdWork, MdContactPhone } from 'react-icons/md'; // Import section icons
 
 interface SidebarProps {
@@ -66,6 +66,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveSection, isSidebarOpen, setI
             <a href="https://twitter.com/nabatah_" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="text-white text-2xl hover:text-blue-400 transition-all duration-300" />
             </a>
+            <a href="https://linkedin.com/in/yanuar-eka-pramudya" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin className="text-white text-2xl hover:text-blue-400 transition-all duration-300" />
+            </a>
+
           </div>
 
           {/* Terminal Version Link */}
