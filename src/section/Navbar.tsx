@@ -68,13 +68,13 @@ const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNa
 
         {/* Add Social Media Icons */}
         <div className="flex space-x-6 mt-6">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/pramudyanuar" target="_blank" rel="noopener noreferrer">
             <FaGithub className="text-white text-2xl hover:text-blue-500 transition-all duration-300" />
           </a>
-          <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://instagram.com/pramudyanuar" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="text-white text-2xl hover:text-pink-500 transition-all duration-300" />
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://twitter.com/nabatah_" target="_blank" rel="noopener noreferrer">
             <FaTwitter className="text-white text-2xl hover:text-blue-400 transition-all duration-300" />
           </a>
         </div>
