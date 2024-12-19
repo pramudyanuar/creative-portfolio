@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-import ProfileCard from '../components/ProfileCard';
+// import ProfileCard from '../components/ProfileCard';
 
 const Home: React.FC = () => {
   return (
@@ -12,13 +12,13 @@ const Home: React.FC = () => {
       >
 
         {/* Foto Profil */}
-        <div className="mb-28 rounded-lg shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:mb-52">
-          {/* <img
+        <div className="h-80 w-50 mb-28 rounded-lg shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:mb-52">
+          <img
             src="/assets/profile.png"
             alt="Profile"
             className="w-full h-full object-cover"
-          /> */}
-          <ProfileCard />
+          />
+          {/* <ProfileCard /> */}
         </div>
 
         {/* Bagian tulisan */}

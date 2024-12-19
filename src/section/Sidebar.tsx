@@ -12,8 +12,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ setActiveSection, isSidebarOpen, setIsSidebarOpen, activeSection }) => {
   const sections = [
     { id: 'home', label: 'Home', icon: MdHome },
-    { id: 'service', label: 'Service', icon: MdBuild },
     { id: 'about', label: 'About', icon: MdInfo },
+    { id: 'service', label: 'Service', icon: MdBuild },
     { id: 'portfolio', label: 'Portfolio', icon: MdWork },
     { id: 'contact', label: 'Contact', icon: MdContactPhone },
   ];

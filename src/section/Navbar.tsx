@@ -34,20 +34,20 @@ const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNa
           Home
         </a>
         <a
-          href="#service"
-          className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
-          onClick={() => { setActiveSection('service'); setIsNavbarOpen(false); }}
-        >
-          <MdBuild className="text-2xl mr-2" />
-          Service
-        </a>
-        <a
           href="#about"
           className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
           onClick={() => { setActiveSection('about'); setIsNavbarOpen(false); }}
         >
           <MdInfo className="text-2xl mr-2" />
           About
+        </a>
+                <a
+          href="#service"
+          className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
+          onClick={() => { setActiveSection('service'); setIsNavbarOpen(false); }}
+        >
+          <MdBuild className="text-2xl mr-2" />
+          Service
         </a>
         <a
           href="#portfolio"
