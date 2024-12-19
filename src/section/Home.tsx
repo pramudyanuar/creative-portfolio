@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
+import ProfileCard from '../components/ProfileCard';
 
 const Home: React.FC = () => {
   return (
@@ -7,27 +8,29 @@ const Home: React.FC = () => {
       {/* Container untuk mengatur lebar dan tinggi */}
       <section
         id="home"
-        className="py-16 bg-gray-800 text-white px-8 max-w-screen-lg w-full h-full flex flex-col justify-center items-center text-center"
+        className="py-12 bg-gray-800 text-white px-6 max-w-screen-lg w-full h-full flex flex-col justify-center items-center text-center"
       >
+
         {/* Foto Profil */}
-        <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-blue-500">
-          <img
-            src="/assets/logo.jpg" // Ganti dengan URL foto kamu
+        <div className="mb-28 rounded-lg shadow-xl transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:mb-52">
+          {/* <img
+            src="/assets/profile.png"
             alt="Profile"
             className="w-full h-full object-cover"
-          />
+          /> */}
+          <ProfileCard />
         </div>
 
         {/* Bagian tulisan */}
         <div className="w-full flex flex-col items-center">
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-4">
+          <h1 className="text-2xl md:text-4xl font-extrabold mb-4 transform transition duration-500 hover:scale-105 hover:text-blue-600">
             Hello, I'm Pramudyanuar
           </h1>
 
           {/* Bagian teks yang berganti-ganti */}
-          <h2 className="text-2xl md:text-4xl font-semibold text-blue-400">
+          <h2 className="text-xl md:text-3xl font-semibold text-blue-400">
             <Typewriter
-              words={['Flutter Developer', 'Website Developer', 'UI/UX Developer']}
+              words={['Flutter Developer', 'Website Developer', 'UI/UX Designer']}
               loop={true}
               cursor
               cursorStyle="_"
@@ -37,7 +40,7 @@ const Home: React.FC = () => {
             />
           </h2>
 
-          <p className="mt-4 text-sm md:text-lg text-gray-400">
+          <p className="mt-4 text-xs md:text-base text-gray-400 transition duration-300 transform hover:translate-y-2 hover:text-gray-300">
             Welcome to my digital space!
           </p>
         </div>

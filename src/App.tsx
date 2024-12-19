@@ -14,13 +14,13 @@ const App: React.FC = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
 
   return (
-    <div className="w-full bg-gray-900 text-white m-0 p-0">
+    <div className="w-full bg-gray-900 text-white m-0 p-0 flex">
       {/* Sidebar */}
       <Sidebar 
         setActiveSection={setActiveSection} 
         isSidebarOpen={isSidebarOpen} 
         setIsSidebarOpen={setIsSidebarOpen} 
-        activeSection={activeSection} // Pass activeSection here
+        activeSection={activeSection}
       />
 
       {/* Navbar (for mobile) */}
@@ -31,7 +31,7 @@ const App: React.FC = () => {
       />
 
       {/* Main Content Area */}
-      <div className={`ml-0 md:ml-80 mt-20 md:mt-0`}>
+      <div className={`flex-1 ml-0 md:ml-64 mt-20 md:mt-0 overflow-y-auto h-screen`}>
         {/* Render the appropriate section based on activeSection */}
         {activeSection === 'home' && <Home />}
         {activeSection === 'service' && <Service />}
