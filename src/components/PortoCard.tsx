@@ -2,10 +2,11 @@ import React from 'react';
 
 interface PortoCardProps {
   imgSrc: string;
-  title: string;         
+  title: string;        
   description: string;
   type: string;
-  videoUrl: string;
+  mediaUrl: string;
+  mediaType: 'video' | 'image';
 }
 
 const PortoCard: React.FC<PortoCardProps> = ({ imgSrc, title, description, type }) => {
@@ -25,7 +26,7 @@ const PortoCard: React.FC<PortoCardProps> = ({ imgSrc, title, description, type 
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
-      
+     
       {/* Text Section */}
       <div className="relative w-full h-auto p-4 flex flex-col justify-center">
         <div className="flex justify-between items-center">
@@ -36,7 +37,6 @@ const PortoCard: React.FC<PortoCardProps> = ({ imgSrc, title, description, type 
           {truncatedDescription}
         </p>
       </div>
-
       {/* Glow Effect */}
       <div className="absolute inset-0 rounded-lg group-hover:ring-2 group-hover:ring-blue-400 group-hover:ring-offset-2 group-hover:ring-offset-black transition-all duration-500"></div>
     </div>

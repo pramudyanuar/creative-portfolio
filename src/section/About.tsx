@@ -35,12 +35,12 @@ const About: React.FC = () => {
                 <span className="font-semibold">Birthday:</span> 7 January 2005
               </p>
               <p>
-                <span className="font-semibold">Age:</span> 19
+                <span className="font-semibold">Age:</span> 20
               </p>
               <p>
                 <span className="font-semibold">Website:</span>{" "}
-                <a href="http://www.domain.com" className="text-red-500">
-                  pramudyanuar.com
+                <a href="http://www.pramudyanuar.my.id" className="text-red-500">
+                  pramudyanuar.my.id
                 </a>
               </p>
               <p>
