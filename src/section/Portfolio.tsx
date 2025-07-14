@@ -6,34 +6,42 @@ import SectionHeader from '../components/SectionHeader';
 const Portfolio: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string>('All');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredPortfolio = selectedType === 'All'
-    ? portfolioData
-    : portfolioData.filter(item => item.type === selectedType);
+  const filteredPortfolio = portfolioData.filter(item => {
+    const matchesType = selectedType === 'All' || item.type === selectedType;
+    const matchesSearch =
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesType && matchesSearch;
+  });
 
   const openDetail = (item: PortfolioItem) => setSelectedItem(item);
   const closeDetail = () => setSelectedItem(null);
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white">
-      <section id="portfolio" className="container mx-auto px-4 py-16 pt-28 sm:pt-24">
+      <section id="portfolio" className="container mx-auto px-4 py-16 pt-28 sm:pt-16">
         <SectionHeader title="My Portfolio" subtitle="A collection of my best work" />
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
-          {filterOptions.map(type => (
-            <button
-              key={type}
-              onClick={() => setSelectedType(type)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300
-                ${selectedType === type
-                  ? 'bg-blue-600 text-white shadow-lg scale-105'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover:scale-105'
-                }`}
-            >
-              {type}
-            </button>
-          ))}
+        {/* Search + Filter Dropdown */}
+        <div className="mb-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <input
+            type="text"
+            placeholder="Search by title or description..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full sm:max-w-md px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            className="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {filterOptions.map(type => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
         </div>
 
         {/* Portfolio Grid */}
@@ -48,10 +56,7 @@ const Portfolio: React.FC = () => {
               <div className="relative bg-gray-800/80 backdrop-blur-md border border-gray-700 rounded-xl shadow-lg overflow-hidden">
                 <div className="relative">
                   <img src={item.imgSrc} alt={item.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
-                  
-                  {/* Shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 animate-shine pointer-events-none" />
-                  
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <p className="text-white text-sm font-semibold">👁 View Details</p>
                   </div>
@@ -70,53 +75,53 @@ const Portfolio: React.FC = () => {
       {/* Modal Detail */}
       {selectedItem && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-all"
           onClick={closeDetail}
         >
           <div
-            className="bg-gray-800/90 border border-gray-700 backdrop-blur-lg shadow-xl rounded-xl max-w-4xl w-full overflow-hidden flex flex-col md:flex-row animate-scale-in"
             onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl mx-auto bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-md border border-gray-700 rounded-2xl shadow-2xl p-4 md:p-6 flex flex-col md:flex-row gap-6 animate-fadeInScale"
           >
             {/* Close Button */}
             <button
               onClick={closeDetail}
-              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-gray-900 text-xl font-bold flex items-center justify-center shadow-lg hover:rotate-90 transition-transform"
+              className="absolute top-3 right-3 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-xl font-bold transition-all"
             >
               ×
             </button>
 
-            {/* Left: Media */}
-            <div className="md:w-1/2 w-full h-56 md:h-auto bg-black">
+            {/* Media Left */}
+            <div className="md:w-1/2 w-full rounded-xl overflow-hidden shadow-inner">
               {selectedItem.mediaType === 'video' ? (
                 <ReactPlayer
                   url={selectedItem.mediaUrl}
                   width="100%"
                   height="100%"
                   controls
-                  className="rounded-l-xl"
+                  className="rounded-xl"
                 />
               ) : (
                 <img
                   src={selectedItem.mediaUrl}
                   alt={selectedItem.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl"
                 />
               )}
             </div>
 
-            {/* Right: Content */}
-            <div className="md:w-1/2 w-full p-6 flex flex-col justify-between">
+            {/* Content Right */}
+            <div className="md:w-1/2 w-full flex flex-col justify-between text-white">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-1">{selectedItem.title}</h2>
-                <p className="text-blue-400 italic text-sm mb-3">Type: {selectedItem.type}</p>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">{selectedItem.description}</p>
+                <h2 className="text-3xl font-bold mb-2">{selectedItem.title}</h2>
+                <p className="text-sm italic text-blue-400 mb-4">Type: {selectedItem.type}</p>
+                <p className="text-gray-300 mb-4 leading-relaxed">{selectedItem.description}</p>
 
                 {selectedItem.techStack && (
                   <div className="flex flex-wrap gap-2 mb-4">
                     {selectedItem.techStack.map((tech: string) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-blue-600 text-xs text-white rounded-full shadow-sm hover:bg-blue-500 transition"
+                        className="px-3 py-1 bg-blue-600 text-xs font-medium rounded-full hover:bg-blue-500 transition"
                       >
                         {tech}
                       </span>
@@ -125,20 +130,35 @@ const Portfolio: React.FC = () => {
                 )}
               </div>
 
-              {selectedItem.deployUrl && (
-                <a
-                  href={selectedItem.deployUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-all"
-                >
-                  🔗 Visit Deployment
-                </a>
-              )}
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4 mt-4">
+                {selectedItem.deployUrl && (
+                  <a
+                    href={selectedItem.deployUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-2 px-4 rounded-lg font-semibold transition-all"
+                  >
+                    🔗 Visit Deployment
+                  </a>
+                )}
+
+                {selectedItem.sourceUrl && (
+                  <a
+                    href={selectedItem.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-center bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg font-medium transition-all"
+                  >
+                    🛠 View Source Code
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 };

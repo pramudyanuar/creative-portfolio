@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import Home from './section/Home';
-import Service from './section/Service';
 import About from './section/About';
 import Portfolio from './section/Portfolio';
 import Contact from './section/Contact';
@@ -43,7 +42,6 @@ const App: React.FC = () => {
 
         {/* Render the appropriate section based on activeSection */}
         {activeSection === 'home' && <Home />}
-        {activeSection === 'service' && <Service />}
         {activeSection === 'about' && <About />}
         {activeSection === 'portfolio' && <Portfolio />}
         {activeSection === 'contact' && <Contact />}
