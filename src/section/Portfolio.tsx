@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
-
-// --- Impor data, tipe, dan opsi filter dari file eksternal ---
 import { portfolioData, filterOptions, type PortfolioItem } from '../data/portfolioData';
 import SectionHeader from '../components/SectionHeader';
 
@@ -9,28 +7,28 @@ const Portfolio: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string>('All');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
 
-  const filteredPortfolio = selectedType === 'All' 
-    ? portfolioData 
+  const filteredPortfolio = selectedType === 'All'
+    ? portfolioData
     : portfolioData.filter(item => item.type === selectedType);
 
   const openDetail = (item: PortfolioItem) => setSelectedItem(item);
   const closeDetail = () => setSelectedItem(null);
 
   return (
-    <div className="w-full min-h-screen bg-gray-900 text-white">
-      <section id="portfolio" className="container mx-auto px-4 py-16 md:py-24">
+    <div className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white">
+      <section id="portfolio" className="container mx-auto px-4 py-16 pt-28 sm:pt-24">
         <SectionHeader title="My Portfolio" subtitle="A collection of my best work" />
 
-        {/* Tombol Filter */}
-        <div className="flex justify-center items-center space-x-2 md:space-x-4 mb-12">
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
           {filterOptions.map(type => (
             <button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`px-4 py-2 rounded-full text-sm md:text-base font-semibold transition-all duration-300 ease-in-out
-                ${selectedType === type 
-                  ? 'bg-blue-600 text-white shadow-lg' 
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300
+                ${selectedType === type
+                  ? 'bg-blue-600 text-white shadow-lg scale-105'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover:scale-105'
                 }`}
             >
               {type}
@@ -38,24 +36,31 @@ const Portfolio: React.FC = () => {
           ))}
         </div>
 
-        {/* Grid Portofolio */}
+        {/* Portfolio Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPortfolio.map((item) => (
-            <div 
-              key={item.title} 
+            <div
+              key={item.title}
               onClick={() => openDetail(item)}
-              className="group bg-gray-800 rounded-lg overflow-hidden shadow-md cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+              className="group relative rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.03]"
             >
-              <div className="relative">
-                <img src={item.imgSrc} alt={item.title} className="w-full h-48 object-cover" />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white text-lg font-bold">View Details</p>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-sm opacity-0 group-hover:opacity-100 transition duration-500" />
+              <div className="relative bg-gray-800/80 backdrop-blur-md border border-gray-700 rounded-xl shadow-lg overflow-hidden">
+                <div className="relative">
+                  <img src={item.imgSrc} alt={item.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                  
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 animate-shine pointer-events-none" />
+                  
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-white text-sm font-semibold">👁 View Details</p>
+                  </div>
                 </div>
-              </div>
-              <div className="p-5">
-                <span className="text-xs font-semibold text-blue-400 uppercase">{item.type}</span>
-                <h3 className="text-xl font-bold mt-1 mb-2 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-sm line-clamp-3">{item.description}</p>
+                <div className="p-4">
+                  <span className="text-[10px] text-blue-400 font-semibold uppercase tracking-wider">{item.type}</span>
+                  <h3 className="text-base font-bold text-white mt-1 mb-1">{item.title}</h3>
+                  <p className="text-gray-400 text-xs line-clamp-3">{item.description}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -64,54 +69,70 @@ const Portfolio: React.FC = () => {
 
       {/* Modal Detail */}
       {selectedItem && (
-        <div 
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 p-4 transition-opacity duration-300 ease-in-out"
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm z-50 p-4"
           onClick={closeDetail}
         >
-          <div 
-            className="bg-gray-800 rounded-xl max-w-2xl w-full relative shadow-2xl animate-fade-in"
+          <div
+            className="bg-gray-800/90 border border-gray-700 backdrop-blur-lg shadow-xl rounded-xl max-w-4xl w-full overflow-hidden flex flex-col md:flex-row animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
             <button
               onClick={closeDetail}
-              className="absolute -top-3 -right-3 bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center text-xl font-bold z-10 hover:bg-gray-300 transition-colors"
+              className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-white text-gray-900 text-xl font-bold flex items-center justify-center shadow-lg hover:rotate-90 transition-transform"
             >
               ×
             </button>
-            
-            <div className="w-full h-56 md:h-72">
+
+            {/* Left: Media */}
+            <div className="md:w-1/2 w-full h-56 md:h-auto bg-black">
               {selectedItem.mediaType === 'video' ? (
                 <ReactPlayer
                   url={selectedItem.mediaUrl}
                   width="100%"
                   height="100%"
                   controls
-                  playing
-                  className="rounded-t-xl overflow-hidden"
+                  className="rounded-l-xl"
                 />
               ) : (
-                <img 
-                  src={selectedItem.mediaUrl} 
-                  alt={selectedItem.title} 
-                  className="w-full h-full object-cover rounded-t-xl"
+                <img
+                  src={selectedItem.mediaUrl}
+                  alt={selectedItem.title}
+                  className="w-full h-full object-cover"
                 />
               )}
             </div>
-            
-            <div className="p-6">
-              <h2 className="text-2xl font-bold mb-2 text-white">{selectedItem.title}</h2>
-              <p className="text-blue-400 italic text-sm mb-4">Type: {selectedItem.type}</p>
-              <p className="text-gray-300 mb-6">{selectedItem.description}</p>
-              
+
+            {/* Right: Content */}
+            <div className="md:w-1/2 w-full p-6 flex flex-col justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-1">{selectedItem.title}</h2>
+                <p className="text-blue-400 italic text-sm mb-3">Type: {selectedItem.type}</p>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">{selectedItem.description}</p>
+
+                {selectedItem.techStack && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {selectedItem.techStack.map((tech: string) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-blue-600 text-xs text-white rounded-full shadow-sm hover:bg-blue-500 transition"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {selectedItem.deployUrl && (
                 <a
                   href={selectedItem.deployUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-full mt-4 text-center bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-bold transition-all duration-300"
+                  className="mt-4 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-all"
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  Visit Deployment
+                  🔗 Visit Deployment
                 </a>
               )}
             </div>

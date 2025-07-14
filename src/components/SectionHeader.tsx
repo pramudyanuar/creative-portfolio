@@ -11,32 +11,20 @@ interface SectionHeaderProps {
 const SectionHeader: React.FC<SectionHeaderProps> = ({ 
   title, 
   subtitle,
-  className = 'text-white', // Default warna teks putih
+  className = 'text-white',
   isHidden = false 
 }) => {
-  // Praktik terbaik: Jangan render apa pun jika isHidden bernilai true.
-  // Ini lebih efisien daripada hanya menyembunyikannya dengan CSS.
-  if (isHidden) {
-    return null;
-  }
+  if (isHidden) return null;
 
   return (
-    <div className={`text-left ${className}`}>
-      <h2 className="font-semibold text-3xl md:text-4xl mb-2">
+    <div className={`text-center mb-12 ${className}`}>
+      <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent mb-2">
         {title}
       </h2>
-      
-      {/* Tampilkan subtitle jika ada */}
       {subtitle && (
-        <p className="text-lg text-current opacity-80 mb-4">
-          {subtitle}
-        </p>
+        <p className="text-base md:text-lg text-gray-300 mb-3">{subtitle}</p>
       )}
-
-      {/* Menggunakan 'border-current' membuat warna garis sama dengan warna teks (className).
-        Jadi, jika Anda memberikan className="text-blue-500", garisnya juga akan biru.
-      */}
-      <hr className="border-t-2 border-current w-24 mb-8" />
+      <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
     </div>
   );
 };

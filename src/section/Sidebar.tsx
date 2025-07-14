@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { MdHome, MdBuild, MdInfo, MdWork, MdContactPhone } from 'react-icons/md';
+import { FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaTimes } from 'react-icons/fa';
+import { MdHome, MdWork } from 'react-icons/md';
 
 interface SidebarProps {
   setActiveSection: (section: string) => void;
@@ -12,21 +12,29 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ setActiveSection, isSidebarOpen, setIsSidebarOpen, activeSection }) => {
   const sections = [
     { id: 'home', label: 'Home', icon: MdHome },
-    { id: 'about', label: 'About', icon: MdInfo },
-    { id: 'service', label: 'Service', icon: MdBuild },
+    // { id: 'about', label: 'About', icon: MdInfo },
+    // { id: 'service', label: 'Service', icon: MdBuild },
     { id: 'portfolio', label: 'Portfolio', icon: MdWork },
-    { id: 'contact', label: 'Contact', icon: MdContactPhone },
+    // { id: 'contact', label: 'Contact', icon: MdContactPhone },
   ];
 
   return (
     <div>
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 w-64 text-white h-full shadow-lg md:block ${
-          isSidebarOpen ? 'block' : 'hidden'
-        } overflow-hidden`}
+        className={`fixed left-0 top-0 w-64 text-white h-full shadow-lg transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out md:block overflow-hidden`}
       >
         <div className="flex flex-col justify-center p-4 space-y-4 items-center h-full">
+          {/* Tombol Close di dalam sidebar */}
+          <button
+            className="absolute top-4 right-4 text-white md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          >
+            <FaTimes size={24} />
+          </button>
+
           {/* Profile Section */}
           <div className="w-full flex flex-col items-center justify-center mb-6">
             <img src="/assets/logo.jpg" alt="Sidebar Logo" className="w-24 h-24 rounded-full mb-4" />
@@ -43,7 +51,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveSection, isSidebarOpen, setI
                   }`}
                   onClick={() => {
                     setActiveSection(section.id);
-                    setIsSidebarOpen(false);
+                    if (window.innerWidth < 768) {
+                      setIsSidebarOpen(false);
+                    }
                   }}
                 >
                   {/* Dynamic Icon */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'; // Social Icons
-import { MdHome, MdBuild, MdInfo, MdWork, MdContactPhone } from 'react-icons/md'; // Section Icons
+import { MdHome, MdWork } from 'react-icons/md'; // Section Icons
 
 interface NavbarProps {
   setActiveSection: (section: string) => void;
@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNa
           <MdHome className="text-2xl mr-2" />
           Home
         </a>
-        <a
+        {/* <a
           href="#about"
           className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
           onClick={() => { setActiveSection('about'); setIsNavbarOpen(false); }}
@@ -41,14 +41,14 @@ const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNa
           <MdInfo className="text-2xl mr-2" />
           About
         </a>
-                <a
+        <a
           href="#service"
           className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
           onClick={() => { setActiveSection('service'); setIsNavbarOpen(false); }}
         >
           <MdBuild className="text-2xl mr-2" />
           Service
-        </a>
+        </a> */}
         <a
           href="#portfolio"
           className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
@@ -57,14 +57,14 @@ const Navbar: React.FC<NavbarProps> = ({ setActiveSection, isNavbarOpen, setIsNa
           <MdWork className="text-2xl mr-2" />
           Portfolio
         </a>
-        <a
+        {/* <a
           href="#contact"
           className="py-3 px-6 text-lg text-white hover:text-indigo-400 transform hover:scale-110 transition-all duration-300 flex items-center"
           onClick={() => { setActiveSection('contact'); setIsNavbarOpen(false); }}
         >
           <MdContactPhone className="text-2xl mr-2" />
           Contact
-        </a>
+        </a> */}
 
         {/* Add Social Media Icons */}
         <div className="flex space-x-6 mt-6">
